@@ -12,6 +12,7 @@ import {
 } from "./ui/sheet";
 import { Button, buttonVariants } from "./ui/button";
 import { NavItem } from "../interfaces/index";
+import { cn } from "@/lib/utils";
 
 interface Props {
   items: NavItem[];
@@ -40,7 +41,18 @@ const MobileNav = ({ items }: Props) => {
           {items.map((item) => (
             <li key={item.label}>
               <NavLink to={item.to} onClick={() => setOpen(false)}>
-                <p className="font-medium text-muted-foreground text-xl">{item.label}</p>
+                <p
+                  className={cn(
+                    "font-medium",
+                    location.pathname === item.to ||
+                      (location.pathname === "/" &&
+                        item.label === "Transactions")
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {item.label}
+                </p>
               </NavLink>
             </li>
           ))}

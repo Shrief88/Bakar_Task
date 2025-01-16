@@ -1,15 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { ModeToggle } from "./ui/ModeToggle";
 import MobileNav from "./MobileNav";
+import { NavItem } from "@/interfaces";
+import { cn } from "@/lib/utils";
 
-const navItems = [
+const navItems: NavItem[] = [
   { label: "Transactions", to: "/transactions" },
   { label: "Account", to: "/account" },
 ];
 
 const Navbar = () => {
+  const location = useLocation();
   return (
     <div className="sticky z-50 top-0 inset-x-0 h-fit py-4 bg-card">
       <header className="relative">
@@ -23,8 +26,19 @@ const Navbar = () => {
 
             <div className="hidden md:flex md:col-span-1 md:gap-4 md:justify-center md:items-center">
               {navItems.map((item) => (
-                <NavLink to={item.to}>
-                  <p className="font-medium text-foreground">{item.label}</p>
+                <NavLink to={item.to} key={item.label}>
+                  <p
+                    className={cn(
+                      "font-medium hover:text-foreground underline-animation",
+                      location.pathname === item.to ||
+                        (location.pathname === "/" &&
+                          item.label === "Transactions")
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </p>
                 </NavLink>
               ))}
             </div>
