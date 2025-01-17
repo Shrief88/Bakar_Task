@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/DataTable";
-import { columns, ColumnProps } from "@/interfaces/column";
+import { columns, ColumnProps } from "@/components/column";
 import data from "@/data/data.json";
 import {
   Card,
