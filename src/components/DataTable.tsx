@@ -1,8 +1,11 @@
 import { useState } from "react";
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
@@ -19,6 +22,8 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "./DataTablePagination";
 import { DataTableViewOptions } from "./DataTableViewOptions";
+import { Input } from "./ui/input";
+import { DataTableColumnFilter } from "./DataTableColumnFilter";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,6 +35,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
@@ -37,8 +43,12 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
     state: {
+      columnFilters,
       sorting,
     },
   });
@@ -46,6 +56,24 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4 gap-6">
+        <Input
+          placeholder="Filter cardholder..."
+          value={
+            (table.getColumn("cardholder")?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) =>
+            table.getColumn("cardholder")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+        <DataTableColumnFilter
+          title="Status"
+          column={table.getColumn("status")}
+        />
+        <DataTableColumnFilter
+          title="Currency"
+          column={table.getColumn("currency")}
+        />
         <DataTableViewOptions table={table} />
       </div>
       <div className="rounded-md border">

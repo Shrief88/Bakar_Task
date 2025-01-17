@@ -23,6 +23,9 @@ export const columns: ColumnDef<ColumnProps>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Currency" />
     ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     accessorFn: (row) => row.currency,
   },
   {
@@ -37,6 +40,9 @@ export const columns: ColumnDef<ColumnProps>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     accessorFn: (row) => row.status,
   },
   {
