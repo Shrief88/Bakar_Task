@@ -8,14 +8,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 const Transactions = () => {
   return (
-    <div className="container mx-auto py-10">
+    <MaxWidthWrapper className="py-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Welcome back!</CardTitle>
-          <CardDescription className="text-md">Here are your recent transactions</CardDescription>
+          <CardDescription className="text-md">
+            Here are your recent transactions
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <DataTable
@@ -24,7 +27,7 @@ const Transactions = () => {
           />
         </CardContent>
       </Card>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 
