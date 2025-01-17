@@ -24,6 +24,7 @@ import { DataTablePagination } from "./DataTablePagination";
 import { DataTableViewOptions } from "./DataTableViewOptions";
 import { Input } from "./ui/input";
 import { DataTableColumnFilter } from "./DataTableColumnFilter";
+import { DataTableDownload } from "./DataTableDownload";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,7 +56,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 gap-6">
+      <div className="grid lg:flex items-center py-4 gap-6">
         <Input
           placeholder="Filter cardholder..."
           value={
@@ -64,16 +65,20 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("cardholder")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="w-[300px] lg:max-w-sm"
         />
-        <DataTableColumnFilter
-          title="Status"
-          column={table.getColumn("status")}
-        />
-        <DataTableColumnFilter
-          title="Currency"
-          column={table.getColumn("currency")}
-        />
+        <div className="flex justify-center gap-2 lg:gap-6">
+          <DataTableColumnFilter
+            title="Status"
+            column={table.getColumn("status")}
+          />
+          <DataTableColumnFilter
+            title="Currency"
+            column={table.getColumn("currency")}
+          />
+          <DataTableDownload table={table} />
+        </div>
+
         <DataTableViewOptions table={table} />
       </div>
       <div className="rounded-md border">
