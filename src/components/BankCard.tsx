@@ -6,7 +6,7 @@ interface BankCardProps {
 
 export const BankCard = ({ cardInfo }: BankCardProps) => {
   return (
-    <div className="border border-black rounded-md p-5 flex flex-col gap-5">
+    <div className="border border-card-foreground rounded-md p-5 flex flex-col gap-5">
       <div className="self-end italic text-2xl font-bold tracking-widest">
         {cardInfo?.brand}
       </div>

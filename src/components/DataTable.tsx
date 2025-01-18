@@ -67,19 +67,23 @@ export function DataTable<TData, TValue>({
           }
           className="w-[300px] lg:max-w-sm"
         />
-        <div className="flex justify-center gap-2 lg:gap-6">
-          <DataTableColumnFilter
-            title="Status"
-            column={table.getColumn("status")}
-          />
-          <DataTableColumnFilter
-            title="Currency"
-            column={table.getColumn("currency")}
-          />
-          <DataTableDownload table={table} />
-        </div>
+        <div className="flex flex-col sm:flex-row flex-1 justify-center gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <DataTableColumnFilter
+              title="Status"
+              column={table.getColumn("status")}
+            />
+            <DataTableColumnFilter
+              title="Currency"
+              column={table.getColumn("currency")}
+            />
+          </div>
 
-        <DataTableViewOptions table={table} />
+          <div className="grid grid-cols-2 lg:ml-auto gap-4">
+            <DataTableDownload table={table} />
+            <DataTableViewOptions table={table} />
+          </div>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

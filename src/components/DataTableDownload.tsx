@@ -26,7 +26,7 @@ export function DataTableDownload<TData>({
   return (
     <Button
       variant={"outline"}
-      className="h-8 ml-auto"
+      className="h-8"
       onClick={() =>
         exportExcel(
           table.getFilteredRowModel().rows as unknown as Row<ColumnProps>[]
