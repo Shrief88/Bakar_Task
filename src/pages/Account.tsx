@@ -6,9 +6,14 @@ import { getCardData } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BankCard } from "@/components/BankCard";
+import { Badge } from "@/components/ui/badge";
 
 const Transactions = () => {
-  const { data : cardInfo, isLoading, isError } = useQuery({
+  const {
+    data: cardInfo,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["info"],
     queryFn: getCardData,
   });
@@ -51,7 +56,10 @@ const Transactions = () => {
                         </p>
                         <p>{cardInfo?.cvc}</p>
                         {cardInfo?.expiryMonth}/{cardInfo?.expiryYear}
-                        <p>{cardInfo?.brand}</p>
+                        <div className="flex gap-2">
+                          <p>{cardInfo?.brand}</p>
+                          <Badge variant="secondary" className="italic tracking-wider">{cardInfo?.brand}</Badge>
+                        </div>
                         <p>{cardInfo?.cardholderName}</p>
                       </>
                     )}
